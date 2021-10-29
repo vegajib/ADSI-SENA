@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="shortcut icon" href="imagenes/logo.ico">
+    <title>Alejandra - Pagina principal</title>
+</head>
+
+<header>
+    <div>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+            <a class="navbar-brand " href="frm_ventas.html">
+                <img class="logo-menu" src="./imagenes/logo.jpg" alt="">
+            </a>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="frm_ventas.html">Ventas</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="frm_productos.html">Productos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="frm_proveedores.html">Proveedores</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="frm_gestionUsuarios.html">Gestion Usuarios</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="titulo-nav">Proveedores</h1>
+            </div>
+        </nav>
+
+        <br />
+
+</header>
+
+<body class="container">
+    <div class="row">
+        <div class="col tabla-p">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Vendedor</th>
+                        <th scope="col">Info de pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                      
+                    <% proveedores.forEach((prov)=>{ %>
+                    <tr>
+                        <td><%=prov.idproveedor%></td>
+                        <td><%=prov.nombre%></td>
+                        <td><%=prov.direccion%></td>
+                        <td><%=prov.telefono%></td>
+                        <td><%=prov.vendedor%></td>
+                        <td><%=prov.info_pago%></td>
+                    </tr> 
+                    <% })%>
+                </tbody>
+                <h2><%proveedores%></h2>
+            </table>
+        </div>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                data-bs-target="#modalNuevo">Nuevo</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                data-bs-target="#modalEditar">Editar</button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                data-bs-target="#modalEliminar">Eliminar</button>
+        </div>
+
+        <!-- Modal nuevo registro-->
+        <div class="modal fade" id="modalNuevo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Nuevo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row g-3">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Nombre Empresa"
+                                        aria-label="First name" id="nom-prov" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Nombre Vendedor"
+                                        aria-label="Last name" id="vend-prov">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Dirección"
+                                        aria-label="First name" id="dir-prov">
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Telefono"
+                                        aria-label="Last name" id="tel-prov">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <textarea class="form-control" placeholder="Información de pago"
+                                        aria-label="First name" id="info-prov"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-dark" id="btn-nuevo-prov">Guardar</button>
+                        <script src="saveProveedor.js"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal editar-->
+        <div class="modal fade" id="modalEditar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Editar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row g-3">
+                                <div class="col">
+                                    <label class="texto-editar">Escriba el nombre de la empresa a editar y presione
+                                        buscar</label>
+                                    <input type="text" class="form-control" placeholder="Nombre de empresa"
+                                        aria-label="First name">
+                                </div>
+                                <div class="col">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Nombre Vendedor"
+                                        aria-label="Last name">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Dirección"
+                                        aria-label="First name">
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" placeholder="Telefono"
+                                        aria-label="Last name">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <textarea class="form-control" placeholder="Información de pago"
+                                        aria-label="First name"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark">Buscar</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-dark">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal eliminar-->
+        <div class="modal fade" id="modalEliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row g-3">
+                                <div class="col">
+                                    <label class="texto-editar">Escriba el nombre de la empresa a eliminar y presione
+                                        buscar</label>
+                                    <input type="text" class="form-control" placeholder="Nombre de empresa"
+                                        aria-label="First name">
+                                </div>
+                                <div class="col">
+                                    <br>
+                                    <input type="text" class="form-control" placeholder="Nombre Vendedor"
+                                        aria-label="Last name">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Dirección"
+                                        aria-label="First name">
+                                </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" placeholder="Telefono"
+                                        aria-label="Last name">
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col">
+                                    <textarea class="form-control" placeholder="Información de pago"
+                                        aria-label="First name"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark">Buscar</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-dark">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+<footer>
+    <div class="row fondo-footer">
+        <div class="col-4 centrar">
+            <img class="logo-footer" src="./imagenes/logo mikfe w.png" alt="">
+        </div>
+        <div class="col-4 centrar">
+            <p class="texto-footer">
+                Mi Kfe internet<br>Telefono +57 301 779 0505<br>Carrera 11 No 11-11<br>Restrepo Valle del Cauca<br>
+            </p>
+        </div>
+        <div class="col-4 centrar">
+            <p class="texto-footer">
+                Lunes a sabado<br>9:00 am - 12:30 pm<br> 2:00 pm - 7:00 pm<br>info@micafeinternet.com.co
+            </p>
+        </div>
+        <div>
+</footer>
+
+</html>

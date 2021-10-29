@@ -1,0 +1,44 @@
+/* div, 
+header, footer{
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+} */
+.titulo-nav{
+    color: white;
+    padding-right: 70px;
+}
+.logo-menu{
+    width: 120px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.logo-footer{
+    width: 150px;
+}
+
+.fondo-footer{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgb(38, 45, 49);
+}
+.texto-footer{
+    color: whitesmoke;
+}
+.tabla-p{
+    margin: 10px 30px 0px 30px;
+}
+.lbl-p{
+    margin-top: 15px;
+}
+
+.texto-editar{
+    font-size: 12px;
+}
