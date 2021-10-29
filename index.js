@@ -27,10 +27,24 @@ app.get('/', function(req, res){
 
 app.get('/frm_proveedores', function(req, res){
     datos= obtenerProveedores()
-    console.log(datos[0].nombre)
+    // console.log(datos[0].nombre)
     res.render('frm_proveedores',{proveedores: datos})
     
 });
+
+app.get('/frm_gestionUsuarios', function(req, res){
+    res.render('frm_gestionUsuarios')    
+});
+
+app.get('/frm_productos', function(req, res){
+    res.render('frm_productos')    
+});
+
+app.get('/frm_ventas', function(req, res){
+    res.render('frm_ventas')    
+});
+
+
 
 app.get('/agregar/:nombre/:vendedor/:direccion/:telefono/:informacion', function(req, res){
     let nombre= req.params.nombre
@@ -39,5 +53,5 @@ app.get('/agregar/:nombre/:vendedor/:direccion/:telefono/:informacion', function
     let telefono= req.params.telefono
     let informacion= req.params.informacion
     agregarProveedor(nombre,vendedor,direccion,telefono,informacion)
-    res.redirect('/')
+    res.redirect('/frm_proveedores')
 });
