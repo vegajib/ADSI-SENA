@@ -60,6 +60,7 @@
                         <th scope="col">Telefono</th>
                         <th scope="col">Vendedor</th>
                         <th scope="col">Info de pago</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,19 +73,25 @@
                         <td><%=prov.telefono%></td>
                         <td><%=prov.vendedor%></td>
                         <td><%=prov.info_pago%></td>
+                        <td>
+                            
+                            <a href="/editprov/<%=prov.idproveedor%>" class="btn btn-dark" >Editar</a>                            
+                            <a href="/borrar" class="btn btn-dark" >Borrar</a>
+                        </td>
                     </tr> 
                     <% })%>
                 </tbody>
-                <h2><%proveedores%></h2>
             </table>
         </div>
         <div class="d-grid gap-3 d-md-flex justify-content-md-end">
             <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                 data-bs-target="#modalNuevo">Nuevo</button>
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+            <!-- <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                 data-bs-target="#modalEditar">Editar</button>
             <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                data-bs-target="#modalEliminar">Eliminar</button>
+                data-bs-target="#modalEliminar">Eliminar</button> -->
+                
+                <!-- editar abre el modal y eliminar pendiente borrar codigo del modal -->
         </div>
 
         <!-- Modal nuevo registro-->
@@ -129,7 +136,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-dark" id="btn-nuevo-prov">Guardar</button>
-                        <script src="saveProveedor.js"></script>
+                        <script src="funcionesProveedor.js"></script>
                     </div>
                 </div>
             </div>

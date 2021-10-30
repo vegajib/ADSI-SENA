@@ -22,7 +22,7 @@ app.use(express.static('./css'))
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
-    res.redirect('frm_proveedores')  
+    res.render('principal')  
 });
 
 app.get('/frm_proveedores', function(req, res){
@@ -43,6 +43,16 @@ app.get('/frm_productos', function(req, res){
 app.get('/frm_ventas', function(req, res){
     res.render('frm_ventas')    
 });
+
+app.get('/editprov/:idproveedor', function(req, res){
+    res.render('editprov')    
+});
+
+app.get('/editprovcancelar', function(req, res){
+    res.redirect('/frm_proveedores')    
+});
+
+
 
 
 
