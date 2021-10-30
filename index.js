@@ -1,8 +1,9 @@
 import express from 'express';
 const app = express()
-import {agregarProveedor, obtenerProveedores} from './src/mysql.js'
+import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor} from './src/mysql.js'
 import path from 'path';
 let datos
+
 
 
 app.listen('8000',function(){
@@ -45,16 +46,15 @@ app.get('/frm_ventas', function(req, res){
 });
 
 app.get('/editprov/:idproveedor', function(req, res){
-    res.render('editprov')    
+    let id= req.params.idproveedor
+    datos=editarProveedor(id)
+    console.log(datos)
+    res.render('editprov',{proveedor:datos[id-1]})    
 });
 
 app.get('/editprovcancelar', function(req, res){
     res.redirect('/frm_proveedores')    
 });
-
-
-
-
 
 app.get('/agregar/:nombre/:vendedor/:direccion/:telefono/:informacion', function(req, res){
     let nombre= req.params.nombre
@@ -63,5 +63,16 @@ app.get('/agregar/:nombre/:vendedor/:direccion/:telefono/:informacion', function
     let telefono= req.params.telefono
     let informacion= req.params.informacion
     agregarProveedor(nombre,vendedor,direccion,telefono,informacion)
+    res.redirect('/frm_proveedores')
+});
+
+app.get('/editprov/editar/:id/:nombre/:vendedor/:direccion/:telefono/:informacion', function(req, res){
+    let id= req.params.id
+    let nombre= req.params.nombre
+    let vendedor= req.params.vendedor
+    let direccion= req.params.direccion
+    let telefono= req.params.telefono
+    let informacion= req.params.informacion
+    actualizarProveedor(id,nombre,vendedor,direccion,telefono,informacion)
     res.redirect('/frm_proveedores')
 });

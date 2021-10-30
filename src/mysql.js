@@ -24,6 +24,14 @@ const agregarProveedor = (nombre,vendedor,direccion,telefono,informacion)=>{
     })
 }
 
+const actualizarProveedor = (id,nombre,vendedor,direccion,telefono,informacion)=>{
+    const sql = `UPDATE proveedor SET nombre="${nombre}", direccion="${direccion}", telefono="${direccion}", telefono="${telefono}", vendedor="${vendedor}", info_pago="${informacion}" WHERE idproveedor=${id}`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+    })
+}
+
 const obtenerProveedores = ()=> {
     const sql = `SELECT * FROM proveedor`
     conexion.query(sql,function(err, result, filed){
@@ -34,5 +42,15 @@ const obtenerProveedores = ()=> {
     return datos
 }
 
-export {conectar, agregarProveedor, obtenerProveedores} 
+const editarProveedor = (id)=> {
+    const sql = `SELECT * FROM proveedor WHERE idproveedor=${id}`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+        datos = result
+    })
+    return datos
+}
+
+export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor} 
 
