@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express()
-import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor} from './src/mysql.js'
+import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor, borrarProveedor} from './src/mysql.js'
 import path from 'path';
 let datos
 
@@ -44,12 +44,20 @@ app.get('/frm_productos', function(req, res){
 app.get('/frm_ventas', function(req, res){
     res.render('frm_ventas')    
 });
-
+//obtener proveedor para editar
 app.get('/editprov/:idproveedor', function(req, res){
     let id= req.params.idproveedor
     datos=editarProveedor(id)
-    console.log(datos)
+    // console.log(datos)
     res.render('editprov',{proveedor:datos[id-1]})    
+});
+
+app.get('/borrarprov/:idproveedor', function(req, res){
+    let id= req.params.idproveedor
+    borrarProveedor(id)
+    // console.log(datos)
+    // res.render('editprov',{proveedor:datos[id-1]}) 
+    res.redirect('/frm_proveedores')   
 });
 
 app.get('/editprovcancelar', function(req, res){
