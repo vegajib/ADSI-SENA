@@ -1,5 +1,7 @@
 import mysql from 'mysql'
 let datos
+let respuesta
+let respuestaUsuarios
 // const mysql = require('mysql')
 
 const conexion = mysql.createConnection({
@@ -18,6 +20,14 @@ const conectar = () =>{
 
 const agregarProveedor = (nombre,vendedor,direccion,telefono,informacion)=>{
     const sql = `INSERT INTO proveedor (idproveedor, nombre, direccion, telefono, vendedor, info_pago) VALUES (${null}, "${nombre}", "${direccion}", ${telefono}, "${vendedor}", "${informacion}")`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+    })
+}
+
+const agregarUsuario = (nombre,pass,rol)=>{
+    const sql = `INSERT INTO usuario (idusuario, nombre, password, rol, rol_idrol) VALUES (${null}, "${nombre}", "${pass}", ${rol}, ${rol})`
     conexion.query(sql,function(err, result, filed){
         if(err) throw err
         // console.log(result)
@@ -45,20 +55,34 @@ const obtenerProveedores = ()=> {
     conexion.query(sql,function(err, result, filed){
         if(err) throw err
         // console.log(result)
-        datos = result
+        respuesta = result
     })
-    return datos
+    return respuesta
+}
+
+const obtenerUsuarios = ()=> {
+    const sql = `SELECT * FROM usuario`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+        respuestaUsuarios = result
+    })
+    return respuestaUsuarios
 }
 
 const editarProveedor = (id)=> {
-    const sql = `SELECT * FROM proveedor WHERE idproveedor=${id}`
+    // console.log(id)
+    const sql = `SELECT * FROM alejandra_db.proveedor WHERE idproveedor=${id}`
+    // console.log(sql)
     conexion.query(sql,function(err, result, filed){
         if(err) throw err
         // console.log(result)
         datos = result
+        // console.log(datos)
     })
+    // console.log(datos)
     return datos
 }
 
-export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor} 
+export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor,obtenerUsuarios, agregarUsuario} 
 
