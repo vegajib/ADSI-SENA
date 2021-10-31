@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express()
-import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor, borrarProveedor, obtenerUsuarios, agregarUsuario} from './src/mysql.js'
+import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor, borrarProveedor, obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario} from './src/mysql.js'
 import path from 'path';
 let datos
 
@@ -52,14 +52,27 @@ app.get('/editprov/:idproveedor', function(req, res){
     res.render('editprov',{proveedor:datos[0]})
 });
 
+//obtener usuario para editar
+app.get('/editusuarios/:idusuario', function(req, res){
+    let id= req.params.idusuario
+    datos=editarUsuario(id)
+    // console.log(datos)
+    res.render('edituser',{user:datos[0]})
+});
+
 app.get('/borrarprov/:idproveedor', function(req, res){
     let id= req.params.idproveedor
     borrarProveedor(id)
     res.redirect('/frm_proveedores')   
 });
 
+//redireccion cancelar edicion
 app.get('/editprovcancelar', function(req, res){
     res.redirect('/frm_proveedores')    
+});
+
+app.get('/editusercancelar', function(req, res){
+    res.redirect('/frm_gestionUsuarios')    
 });
 
 //agregar nuevo proveedor
@@ -82,6 +95,7 @@ app.get('/agregar/:nombre/:pass/:rol', function(req, res){
     res.redirect('/frm_gestionUsuarios')
 });
 
+//editar proveedor
 app.get('/editprov/editar/:id/:nombre/:vendedor/:direccion/:telefono/:informacion', function(req, res){
     let id= req.params.id
     let nombre= req.params.nombre
@@ -91,4 +105,14 @@ app.get('/editprov/editar/:id/:nombre/:vendedor/:direccion/:telefono/:informacio
     let informacion= req.params.informacion
     actualizarProveedor(id,nombre,vendedor,direccion,telefono,informacion)
     res.redirect('/frm_proveedores')
+});
+
+//editar usuario
+app.get('/editusuarios/editar/:id/:nombre/:pass/:rol', function(req, res){
+    let id= req.params.id
+    let nombre= req.params.nombre
+    let pass= req.params.pass
+    let rol= req.params.rol
+    actualizarUsuario(id,nombre,pass,rol)
+    res.redirect('/frm_gestionUsuarios')
 });

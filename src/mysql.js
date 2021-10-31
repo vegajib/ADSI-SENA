@@ -1,5 +1,6 @@
 import mysql from 'mysql'
 let datos
+let datosUsuario
 let respuesta
 let respuestaUsuarios
 // const mysql = require('mysql')
@@ -50,6 +51,14 @@ const actualizarProveedor = (id,nombre,vendedor,direccion,telefono,informacion)=
     })
 }
 
+const actualizarUsuario = (id,nombre,pass,rol)=>{
+    const sql = `UPDATE usuario SET nombre="${nombre}", password="${pass}", rol=${rol}, rol_idrol=${rol} WHERE idusuario=${id}`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+    })
+}
+
 const obtenerProveedores = ()=> {
     const sql = `SELECT * FROM proveedor`
     conexion.query(sql,function(err, result, filed){
@@ -84,5 +93,19 @@ const editarProveedor = (id)=> {
     return datos
 }
 
-export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor,obtenerUsuarios, agregarUsuario} 
+const editarUsuario = (id)=> {
+    // console.log(id)
+    const sql = `SELECT * FROM alejandra_db.usuario WHERE idusuario=${id}`
+    // console.log(sql)
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+        datosUsuario = result
+        // console.log(datos)
+    })
+    // console.log(datos)
+    return datosUsuario
+}
+
+export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor,obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario} 
 
