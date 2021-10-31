@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express()
-import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor, borrarProveedor, obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario} from './src/mysql.js'
+import {agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor, borrarProveedor, obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario, borrarUsuario} from './src/mysql.js'
 import path from 'path';
 let datos
 
@@ -60,10 +60,17 @@ app.get('/editusuarios/:idusuario', function(req, res){
     res.render('edituser',{user:datos[0]})
 });
 
+//borrar
 app.get('/borrarprov/:idproveedor', function(req, res){
     let id= req.params.idproveedor
     borrarProveedor(id)
     res.redirect('/frm_proveedores')   
+});
+
+app.get('/borrarusuario/:idusuario', function(req, res){
+    let id= req.params.idusuario
+    borrarUsuario(id)
+    res.redirect('/frm_gestionUsuarios')   
 });
 
 //redireccion cancelar edicion

@@ -43,6 +43,14 @@ const borrarProveedor = (id)=>{
     })
 }
 
+const borrarUsuario = (id)=>{
+    const sql = `DELETE FROM usuario WHERE idusuario=${id}`
+    conexion.query(sql,function(err, result, filed){
+        if(err) throw err
+        // console.log(result)
+    })
+}
+
 const actualizarProveedor = (id,nombre,vendedor,direccion,telefono,informacion)=>{
     const sql = `UPDATE proveedor SET nombre="${nombre}", direccion="${direccion}", telefono="${direccion}", telefono="${telefono}", vendedor="${vendedor}", info_pago="${informacion}" WHERE idproveedor=${id}`
     conexion.query(sql,function(err, result, filed){
@@ -107,5 +115,5 @@ const editarUsuario = (id)=> {
     return datosUsuario
 }
 
-export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor,obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario} 
+export {conectar, agregarProveedor, obtenerProveedores, editarProveedor, actualizarProveedor,borrarProveedor,obtenerUsuarios, agregarUsuario, editarUsuario, actualizarUsuario, borrarUsuario} 
 
